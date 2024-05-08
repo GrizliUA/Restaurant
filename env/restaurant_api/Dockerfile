@@ -1,15 +1,14 @@
-# Dockerfile
+FROM python:3.8
 
-FROM python:3.9.7
-LABEL key="Restaurant API Project"
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# COPY requirement.txt requirement.txt
-RUN pip install -r /requirement.txt
+# Define environment variable
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 
-COPY . /restaurant_api
-WORKDIR /restaurant_api
+# Copy the current directory contents into the container at /usr/src/app
+COPY . .
 
-EXPOSE 8000
-
-ENTRYPOINT [ "python", "/app/restaurant_api/manage.py"]
-CMD ["runserver", "0.0.0.0:8000"]
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt

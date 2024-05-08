@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!-8@fo)!i2@&)q+=(y=h)bw(l(4bd#nvz!ce2ws89tdr&e*y35
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -78,24 +78,24 @@ WSGI_APPLICATION = 'restaurant_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+# elif not DEBUG:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'RestaurantDB',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'db',
+        'PORT': '5432'
     }
-elif not DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'Postgres_DB',
-            'USER': 'Postgres_User',
-            'PASSWORD': 'Postgres_Password',
-            'HOST': 'localhost',
-            'PORT': '5432'
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
